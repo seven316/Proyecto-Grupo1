@@ -12,12 +12,12 @@
                         <Label Font="25" TextColor="#860000">Bienvenido</Label>
                     </StackLayout>
 
-                    <Entry x:Name="txtEmail" Placeholder="Email" TextColor="Black" Text="2@gmail.com" />
-                    <Entry x:Name="txtContrasena" Placeholder="Contraseña" IsPassword="True" TextColor="Black" Text="123456" />
+                    <Entry x:Name="txtEmail" Placeholder="Email" TextColor="Black" Text="" />
+                    <Entry x:Name="txtContrasena" Placeholder="Contraseña" IsPassword="True" TextColor="Black" Text="" />
 
                     <Button x:Name="btnIniciarSesion" Text="Iniciar Sesión" BackgroundColor="#2FB96E" TextColor="White" Clicked="BtnIniciarSesion_Clicked" />
                     <Button x:Name="btnRegistrarse" Text="Registrarse" BackgroundColor="#1964BE" TextColor="White" Clicked="BtnRegistrarse_Clicked"/>
-                    <Button x:Name="btnRecuperar" Text="Recuperar Contraseña" BackgroundColor="#1964BE" TextColor="White" Clicked="BtnRegistrarse_Clicked"/>
+                   
                 </StackLayout>
 
             </Frame>

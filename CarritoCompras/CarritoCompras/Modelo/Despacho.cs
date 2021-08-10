@@ -12,5 +12,10 @@ namespace CarritoCompras.Modelo
         public string provincia { get; set; }
         public string distrito { get; set; }
         public string celular { get; set; }
+
+        public Double latitud { get; set;}
+        public Double longuitud { get; set; }
+
+
     }
 }

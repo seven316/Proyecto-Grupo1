@@ -6,32 +6,37 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CarritoCompras.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PageDespacho : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class PageDespacho : ContentPage
+    {
         public List<Departamento> oListaDepartamento { get; set; }
         public List<Provincia> oListaProvincia { get; set; }
         public List<Distrito> oListaDistrito { get; set; }
         public List<Tienda> oListaTienda { get; set; }
 
+        public  Double Latitud { get; set; }
+
+        public Double Longuitud { get; set; }
+
         public ObservableCollection<Bolsa> oListaGlobalBolsa = new ObservableCollection<Bolsa>();
 
-        public PageDespacho (ObservableCollection<Bolsa> oListaBolsa,bool delivery)
-		{
-			InitializeComponent ();
+        public PageDespacho(ObservableCollection<Bolsa> oListaBolsa, bool delivery)
+        {
+            InitializeComponent();
             if (delivery)
             {
                 this.Title = "Despacho";
                 obtenerDepartamento();
                 ContentDelivery.IsVisible = true;
             }
-            else{
+            else
+            {
                 this.Title = "Retiro";
                 obtenerTiendas();
                 ContentRetiro.IsVisible = true;
@@ -67,7 +72,7 @@ namespace CarritoCompras.View
             pickerDistrito.ItemsSource = oListaDistrito;
         }
 
-        
+
 
         private void SearchTiendas_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -86,13 +91,36 @@ namespace CarritoCompras.View
                 return;
             }
 
-            Despacho oDespacho = new Despacho() {
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.Best);
+                var locations = await Geolocation.GetLocationAsync(request);
+
+
+                if (locations != null)
+                {
+                    Latitud= locations.Latitude;
+                    Longuitud = locations.Longitude;
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+            }
+
+            Despacho oDespacho = new Despacho()
+            {
+
                 personaContacto = txtPersonaContacto.Text,
                 direccion = txtDireccion.Text,
                 departamento = ((Departamento)pickerDepartamento.SelectedItem).nombredepartamento,
                 provincia = ((Provincia)pickerProvincia.SelectedItem).nombreprovincia,
                 distrito = ((Distrito)pickerDistrito.SelectedItem).nombredistrito,
-                celular = txtCelular.Text
+                celular = txtCelular.Text,
+                latitud = Latitud,
+                longuitud = Longuitud
+             
 
 
             };
@@ -123,6 +151,27 @@ namespace CarritoCompras.View
             };
 
             await Navigation.PushAsync(new PagePago(oCompra));
+        }
+
+        private async void btnUbicacion_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.Best);
+                var location = await Geolocation.GetLocationAsync(request);
+
+
+                if (location != null)
+                {
+                    
+                    
+                }
+
+            }
+
+            catch(Exception ex)
+            {
+            }
         }
     }
 }

@@ -86,9 +86,21 @@
                                 <Entry x:Name="txtCelular" TextColor="Black" Placeholder="Ejem: 96857845" Keyboard="Numeric"/>
                             </StackLayout>
 
-                            <Button Grid.Column="0" Grid.Row="7" x:Name="btnContinuar" Text="Continuar" BackgroundColor="#1964BE" TextColor="White" Clicked="BtnContinuar_Clicked"/>
+                        <StackLayout Grid.Column="0" Grid.Row="7" Orientation="Vertical" HorizontalOptions="Fill">
+                            <Label>Longuitud:</Label>
+                            <Entry x:Name="txtLonguitud" TextColor="Black" Placeholder="Latitud" Keyboard="Numeric"/>
+                        </StackLayout>
 
-                        </Grid>
+                        <StackLayout Grid.Column="0" Grid.Row="8" Orientation="Vertical" HorizontalOptions="Fill">
+                            <Label>Latitud:</Label>
+                            <Entry x:Name="txtLatitud" TextColor="Black" Placeholder="Longuitud" Keyboard="Numeric"/>
+                        </StackLayout>
+
+                        <Button Grid.Column="0" Grid.Row="9" x:Name="btnContinuar" Text="Continuar" BackgroundColor="#1964BE" TextColor="White" Clicked="BtnContinuar_Clicked"/>
+
+                        <Button Grid.Column="0" Grid.Row="10" x:Name="btnUbicacion" Text="Obtener unbicacion" BackgroundColor="#1964BE" TextColor="White" Clicked="btnUbicacion_Clicked"/>
+
+                    </Grid>
                     </ScrollView>
 
                 </ContentView>
